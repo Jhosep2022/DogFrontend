@@ -21,7 +21,7 @@ export class DogService {
   listDogs(): Observable<Dog[]> {
     return this.http.get<any>(`${this.BASE_URL}/list`).pipe(
       map(response => response.data.content.map((dog: Dog) => ({
-        id: dog.id,
+        idMascotas: dog.idMascotas,
         message: dog.message,
         status: dog.status
       })))
