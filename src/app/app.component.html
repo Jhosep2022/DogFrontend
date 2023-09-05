@@ -1,1 +1,10 @@
-<router-outlet ></router-outlet>
+<div class="header">
+  <!-- El componente app-dog se mostrará siempre -->
+  <app-dog></app-dog>
+
+  <!-- Botón para mostrar la lista de imágenes -->
+  <button (click)="showDogsList()">Mostrar Lista de Imágenes</button>
+</div>
+
+<!-- El componente app-dog-list se mostrará solo si la variable showList es verdadera (true) -->
+<app-dog-list *ngIf="showList"></app-dog-list>

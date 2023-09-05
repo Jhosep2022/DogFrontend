@@ -7,5 +7,9 @@ import { RouterModule, Routes} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'DogFrontend';
+  showList = false; // Inicialmente, la lista de imágenes está oculta
+
+  showDogsList() {
+    this.showList = !this.showList; // Cambia el estado de showList al hacer clic en el botón
+  }
 }

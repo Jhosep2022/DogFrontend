@@ -1,1 +1,8 @@
-<p>dog works!</p>
+
+<mat-card *ngIf="dog">
+  <mat-card-content>
+    <img [src]="dog.message" alt="Dog Image" style="width: 100%; max-width: 500px;">
+  </mat-card-content>
+</mat-card>
+
+<button mat-raised-button color="accent" (click)="addRandomDog()">ImagenAleatoria</button>

@@ -1,0 +1,33 @@
+<!-- Importa el modulo MatCardModule para usar mat-card y MatTableModule para mat-table en tu módulo Angular -->
+<mat-card>
+  <mat-table [dataSource]="dogs">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let dog"> {{ dog.id }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="message">
+      <mat-header-cell *matHeaderCellDef> Mensaje </mat-header-cell>
+      <mat-cell *matCellDef="let dog"> {{ dog.message }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>
+      <mat-cell *matCellDef="let dog">
+        <img [src]="dog.message" alt="Dog Image" style="width: 50px; height: 50px;">
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['id', 'message', 'image']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['id', 'message', 'image'];"></mat-row>
+  </mat-table>
+</mat-card>
+
+<!-- Si no hay datos -->
+<ng-template #noDogs>
+  <mat-card>
+    <mat-card-content>
+      No hay perros para mostrar.
+    </mat-card-content>
+  </mat-card>
+</ng-template>
