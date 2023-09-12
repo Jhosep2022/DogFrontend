@@ -1,42 +1,29 @@
-<!-- Importa el modulo MatCardModule para usar mat-card y MatTableModule para mat-table en tu módulo Angular -->
-<mat-card>
-  <mat-table [dataSource]="dogs">
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-icon>pets</mat-icon>
-        ID
-      </mat-header-cell>
-      <mat-cell *matCellDef="let dog"> {{ dog.idMascotas }} </mat-cell>
-    </ng-container>
+<div class="container">
+  <h1>Lista de Perros</h1>
 
-    <ng-container matColumnDef="message">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-icon>message</mat-icon>
-        Mensaje
-      </mat-header-cell>
-      <mat-cell *matCellDef="let dog"> {{ dog.message }} </mat-cell>
-    </ng-container>
+  <div *ngIf="dogs && dogs.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Mascotas</th>
+          <th>Imagen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dog of dogs">
+          <td>{{ dog.idMascotas }}</td>
+          <td><img [src]="dog.message" ></td>
+        </tr>
+      </tbody>
+    </table>
 
-    <ng-container matColumnDef="image">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-icon>image</mat-icon>
-        Imagen
-      </mat-header-cell>
-      <mat-cell *matCellDef="let dog">
-        <img [src]="dog.message" alt="Dog Image" style="width: 50px; height: 50px;">
-      </mat-cell>
-    </ng-container>
+    <app-pagination
+      [currentPage]="currentPage"
+      [itemsPerPage]="itemsPerPage"
+      [totalItems]="totalItems"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
 
-    <mat-header-row *matHeaderRowDef="['id', 'message', 'image']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['id', 'message', 'image'];"></mat-row>
-  </mat-table>
-</mat-card>
-
-<!-- Si no hay datos -->
-<ng-template #noDogs>
-  <mat-card>
-    <mat-card-content>
-      No hay perros para mostrar.
-    </mat-card-content>
-  </mat-card>
-</ng-template>
+  <p *ngIf="!dogs || dogs.length === 0">No se encontraron perros.</p>
+</div>

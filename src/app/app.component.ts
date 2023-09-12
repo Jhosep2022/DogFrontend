@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule, Routes} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,14 @@ import { RouterModule, Routes} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  showList = false; // Inicialmente, la lista de imágenes está oculta
+  [x: string]: any;
+  constructor(private router: Router) {}
 
-  showDogsList() {
-    this.showList = !this.showList; // Cambia el estado de showList al hacer clic en el botón
+  navigateToDogPage() {
+    this.router.navigate(['/app-dog']); // Navega a la página App Dog
+  }
+
+  navigateToDogListPage() {
+    this.router.navigate(['/app-dog-list']); // Navega a la página App Dog List
   }
 }

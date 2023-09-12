@@ -1,10 +1,12 @@
 <div class="header">
-  <!-- El componente app-dog se mostrará siempre -->
-  <app-dog></app-dog>
 
-  <!-- Botón para mostrar la lista de imágenes -->
-  <button (click)="showDogsList()">Mostrar Lista de Imágenes</button>
+  <p>
+    <button mat-raised-button color="warn" routerLink="/app-dog">Ir a generar perros randomicos</button>
+
+    <button mat-raised-button color="primary" routerLink="/app-dog-list" >Ir a lista de Perros</button>
+  </p>
+
 </div>
 
-<!-- El componente app-dog-list se mostrará solo si la variable showList es verdadera (true) -->
-<app-dog-list *ngIf="showList"></app-dog-list>
+<!-- El componente app-dog se mostrará en función de la ruta actual -->
+<router-outlet></router-outlet>

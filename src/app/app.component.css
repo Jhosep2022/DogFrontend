@@ -11,3 +11,9 @@ mat-cell img {
   height: auto;
   border-radius: 5px;
 }
+
+p {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
