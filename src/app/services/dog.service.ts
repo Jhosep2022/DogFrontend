@@ -21,7 +21,7 @@ export class DogService {
     );
   }
 
-  listDogsPage(pageNumber: number = 0, pageSize: number = 10): Observable<Paginator<Dog>> {
+  listDogsPage(pageNumber: number = 0, pageSize: number = 10): Observable<any> {
     const params = new HttpParams()
         .set('page', pageNumber.toString())
         .set('size', pageSize.toString());

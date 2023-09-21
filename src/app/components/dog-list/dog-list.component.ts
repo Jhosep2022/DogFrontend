@@ -21,6 +21,7 @@ export class DogListComponent implements OnInit {
 
   ngOnInit() {
     this.loadDogs(0, 5); // Carga inicial con valores predeterminados
+    this.dataSource.paginator = this.paginator;
   }
 
   pageChangeEvent($event: PageEvent) {
@@ -30,13 +31,11 @@ export class DogListComponent implements OnInit {
 
   loadDogs(page: number, size: number) {
     this.dogService.listDogsPage(page, size).subscribe((response) => {
-        console.log(response);
-        this.maxSize = response.totalElements;
-        this.isLoading = false;
-        this.dataSource.data = response.content;
-        console.log("DataSource:", this.dataSource.data);
-
-        this.cdRef.detectChanges();  // <-- Añade esto aquí para forzar la detección de cambios
+        console.log("Respuesta completa:", response);
+        console.log("Contenido de la respuesta:", response.data.content);
+        this.dataSource.data = response.data.content;
+        console.log("DataSource después de la asignación:", this.dataSource.data);
     });
-  }
+}
+
 }
