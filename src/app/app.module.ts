@@ -15,8 +15,9 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { PaginationComponent } from './components/pagination/pagination.component';
 import { AuthGuard } from './authguard';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -40,7 +41,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     DogComponent,
     MainComponent,
     DogListComponent,
-    PaginationComponent
+
   ],
   imports: [
     BrowserModule,
@@ -49,6 +50,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
+    MatPaginatorModule,
     MatTableModule,
     MatIconModule,
     KeycloakAngularModule

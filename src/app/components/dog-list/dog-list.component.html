@@ -1,29 +1,35 @@
 <div class="container">
   <h1>Lista de Perros</h1>
 
-  <div *ngIf="dogs && dogs.length > 0">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID Mascotas</th>
-          <th>Imagen</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let dog of dogs">
-          <td>{{ dog.idMascotas }}</td>
-          <td><img [src]="dog.message" ></td>
-        </tr>
-      </tbody>
+  <div *ngIf="dataSource.data.length > 0">
+    <table mat-table [dataSource]="dataSource" class="table">
+
+      <!-- Columna ID Mascotas -->
+      <ng-container matColumnDef="idMascotas">
+        <th mat-header-cell *matHeaderCellDef>ID Mascotas</th>
+        <td mat-cell *matCellDef="let dog">{{ dog.idMascotas }}</td>
+      </ng-container>
+
+      <!-- Columna Imagen -->
+      <ng-container matColumnDef="message">
+        <th mat-header-cell *matHeaderCellDef>Imagen</th>
+        <td mat-cell *matCellDef="let dog">
+          <img [src]="dog.message" alt="Imagen de perro" width="100"> <!-- Ajusta el width según lo que necesites -->
+        </td>
+      </ng-container>
+
+      <!-- Definición de filas de encabezado y cuerpo -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <app-pagination
-      [currentPage]="currentPage"
-      [itemsPerPage]="itemsPerPage"
-      [totalItems]="totalItems"
-      (pageChange)="onPageChange($event)"
-    ></app-pagination>
+    <!-- Paginador -->
+    <mat-paginator [length]="maxSize"
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="pageChangeEvent($event)">
+    </mat-paginator>
   </div>
 
-  <p *ngIf="!dogs || dogs.length === 0">No se encontraron perros.</p>
+  <p *ngIf="dataSource.data.length === 0">No se encontraron perros.</p>
 </div>

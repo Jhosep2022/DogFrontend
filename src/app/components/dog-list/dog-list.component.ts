@@ -1,44 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 import { DogService } from 'src/app/services/dog.service';
 import { Dog } from '../models/dog';
-import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dog-list',
   templateUrl: './dog-list.component.html'
 })
 export class DogListComponent implements OnInit {
-  dogs: any[] = [];
-  currentPage = 1;
-  itemsPerPage = 10;
-  totalItems = 0;
 
-  constructor(private dogService: DogService) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource: MatTableDataSource<Dog> = new MatTableDataSource<Dog>([]);
+  displayedColumns: string[] = ['idMascotas', 'message'];// Ajusta según tus columnas
+  dogs$ = this.dogService.listDogs(); // Asume que listDogs devuelve un Observable
+  maxSize: number = 0;
+  isLoading: boolean = false;
+
+  constructor(private dogService: DogService) { }
 
   ngOnInit() {
-    this.loadDogs();
+    this.dogs$
+      .subscribe((response) => {
+        console.log(response);
+        this.maxSize = response.totalElements; // Ajusta según la respuesta de tu API
+        this.isLoading = false; // Asume que no hay un indicador de carga en tu respuesta
+        this.dataSource.data = response.content; // Ajusta según la respuesta de tu API
+      });
   }
 
-  loadDogs() {
-    this.dogService.listDogsPage(this.currentPage, this.itemsPerPage).pipe(
-      catchError(error => {
-        console.error('Error en la solicitud HTTP:', error);
-        // Puedes agregar lógica adicional de manejo de errores aquí
-        return [];
-      })
-      ).subscribe(response => {
-        this.dogs = response.content;
-        this.totalItems = response.totalElements;
-        console.log(this.dogs); // Para verificar que los datos se asignen correctamente
-     });
-  }
-
-
-
-
-
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.loadDogs();
+  pageChangeEvent($event: PageEvent) {
+    console.log($event);
+    this.dogService.listDogs($event.pageIndex, 5).subscribe(); // Asume que listDogsPage acepta índice de página y tamaño de página
   }
 }
