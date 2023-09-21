@@ -21,19 +21,20 @@ export class DogService {
     );
   }
 
-  listDogs(pageNumber: number = 0, pageSize: number=10): Observable<Paginator<Dog>> {
+  listDogsPage(pageNumber: number = 0, pageSize: number = 10): Observable<Paginator<Dog>> {
     const params = new HttpParams()
-      .set('page', pageNumber.toString())
-      .set('elements', pageSize.toString());
+        .set('page', pageNumber.toString())
+        .set('size', pageSize.toString());
 
-    return this.http.get<Paginator<Dog>>(`${this.BASE_URL}/list`, {params}).pipe(
-      tap(response => console.log('API Response:', response)),
-      catchError(error => {
-        console.error('Error en la solicitud HTTP:', error);
-        return [];
-      })
-    );
-  }
+    return this.http.get<Paginator<Dog>>(`${this.BASE_URL}/list`, { params })
+        .pipe(
+            tap(response => console.log('API Response:', response)),
+            catchError(error => {
+                console.error('Error en la solicitud HTTP:', error);
+                return [];
+            })
+        );
+}
 
 
 }
