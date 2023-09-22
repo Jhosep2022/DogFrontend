@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Paginator } from '../components/models/paginator';
 import { tap, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DogService {
-  private BASE_URL = 'http://localhost:7070/api/dogs';
+  private BASE_URL = `${environment.API_URL}/api/dogs`;
 
   constructor(private http: HttpClient) { }
 
