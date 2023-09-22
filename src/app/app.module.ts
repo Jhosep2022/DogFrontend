@@ -10,30 +10,17 @@ import { MainComponent } from './components/main/main.component';
 import { DogListComponent } from './components/dog-list/dog-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button'; // Importa los módulos necesarios
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { KeycloakAngularModule, KeycloakService } from "keycloak-angular";
 // Importaciones de Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthGuard } from './authguard';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-function initializeKeycloak(keycloak: KeycloakService) {
-  return () =>
-    keycloak.init({
-      config: {
-        url: 'http://localhost:8080',
-        realm: 'keycloak',
-        clientId: 'currency-web'
-      },
-      initOptions: {
-        onLoad: 'login-required',
-        silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
-      }
-    });
-}
+import { MatDialogModule } from '@angular/material/dialog';
+import { AuthGuard } from './guards/auth.guard';
+import { initializeKeycloak } from './init/keycloak.init';
+import { ErrorComponent } from './components/error/error.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +28,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     DogComponent,
     MainComponent,
     DogListComponent,
-
+    ErrorComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +39,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatCardModule,
     MatButtonModule,
     MatPaginatorModule,
+    MatDialogModule,
     MatTableModule,
     MatIconModule,
     KeycloakAngularModule
@@ -62,8 +51,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService]
-
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })
