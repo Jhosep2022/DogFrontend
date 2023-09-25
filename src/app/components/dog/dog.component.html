@@ -1,9 +1,13 @@
+<!-- Spinner que se muestra mientras se carga la imagen del perro -->
+<ngx-spinner *ngIf="isLoading" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
 
-<mat-card *ngIf="dog">
+<!-- Tarjeta que se muestra una vez que la imagen del perro esté cargada -->
+<mat-card *ngIf="dog && !isLoading">
   <mat-card-content>
-    <img [src]="dog.message" alt="Dog Image" style="width: 20%;  heith: 20%">
+    <img [src]="dog.message" alt="Dog Image" style="width: 20%; height: 20%">
   </mat-card-content>
 </mat-card>
-
 
 <button mat-raised-button color="accent" (click)="addRandomDog()">ImagenAleatoria</button>

@@ -21,6 +21,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { initializeKeycloak } from './init/keycloak.init';
 import { ErrorComponent } from './components/error/error.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     MatDialogModule,
     MatTableModule,
     MatIconModule,
+    NgxSpinnerModule,
     KeycloakAngularModule
   ],
   providers: [

@@ -29,11 +29,12 @@
     "@ngneat/elf-entities": "^4.5.0",
     "@ngneat/elf-pagination": "^1.1.0",
     "@ngneat/elf-persist-state": "^1.1.6",
-    "@ngneat/elf-requests": "^1.9.0",
+    "@ngneat/elf-requests": "^1.9.1",
     "@ngneat/elf-state-history": "^1.4.0",
     "@ngneat/react-rxjs": "^1.1.0",
     "keycloak-angular": "^14.1.0",
     "keycloak-js": "^22.0.3",
+    "ngx-spinner": "^16.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

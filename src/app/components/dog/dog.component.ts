@@ -8,6 +8,7 @@ import { Dog } from '../models/dog';
 })
 export class DogComponent implements OnInit {
   dog: Dog | null = null;  // Cambiamos a 'dog' y establecemos inicialmente a null
+  isLoading = false;
 
   constructor(private dogService: DogService) {}
 
@@ -16,8 +17,10 @@ export class DogComponent implements OnInit {
   }
 
   addRandomDog() {
+    this.isLoading = true;
     this.dogService.fetchRandomDog().subscribe(response => {
-      this.dog = response;  // Asignamos la respuesta a la propiedad 'dog'
+      this.dog = response;
+      this.isLoading = false;  
     });
   }
 }
